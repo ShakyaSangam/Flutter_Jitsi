@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:near/provider_app.dart';
-import 'package:near/screen_main.dart';
+import 'package:near/logic/providers/provider_app.dart';
+import 'package:near/presentations/screen_main.dart';
 import 'package:provider/provider.dart';
 
 class Splash extends StatefulWidget {
@@ -53,10 +53,17 @@ class _SplashState extends State<Splash> {
                     ),
                     Expanded(child: Container()),
                     appProvider.isStorageGranted
-                        ? RaisedButton(
-                            padding: EdgeInsets.only(
-                                left: 60, right: 60, top: 10, bottom: 10),
-                            color: Colors.blueAccent,
+                        ? ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              onPrimary: Colors.black87,
+                              primary: Colors.grey[300],
+                              minimumSize: Size(88, 36),
+                              padding: EdgeInsets.symmetric(horizontal: 16),
+                              shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(2)),
+                              ),
+                            ),
                             onPressed: () => appProvider.checkPermission(),
                             child: Text(
                               'Start Meeting',

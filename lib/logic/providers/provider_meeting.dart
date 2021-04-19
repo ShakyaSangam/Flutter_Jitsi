@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:near/database_meetings.dart';
+import 'package:near/logic/providers/database_meetings.dart';
 import 'package:uuid/uuid.dart';
 
 class MeetingsProvider extends ChangeNotifier {
   var db = MeetingsDB();
+  // ignore: non_constant_identifier_names
   List _all_meetings = [];
 
   List get listMeetings {

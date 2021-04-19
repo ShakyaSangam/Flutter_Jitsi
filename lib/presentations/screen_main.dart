@@ -1,10 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:near/screen_home.dart';
-import 'package:near/screen_join.dart';
-import 'package:near/screen_settings.dart';
-import 'constants.dart';
+import 'package:near/logic/providers/provider_app.dart';
+import 'package:near/presentations/screen_home.dart';
+import 'package:near/presentations/screen_join.dart';
+import 'package:provider/provider.dart';
+import '../constants/constants.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -34,6 +35,19 @@ class _MainScreenState extends State<MainScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(Constants.appName),
+          actions: [
+            Switch(
+              value: Provider.of<AppProvider>(context).isDarkMode,
+              onChanged: (value) => {
+                if (value)
+                  Provider.of<AppProvider>(context, listen: false)
+                      .setTheme('dark')
+                else
+                  Provider.of<AppProvider>(context, listen: false)
+                      .setTheme('light')
+              },
+            ),
+          ],
         ),
         body: PageView(
           physics: NeverScrollableScrollPhysics(),
@@ -42,7 +56,6 @@ class _MainScreenState extends State<MainScreen> {
           children: <Widget>[
             Home(),
             Join(),
-            Settings(),
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
@@ -51,27 +64,15 @@ class _MainScreenState extends State<MainScreen> {
             items: [
               BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.home,
+                  Icons.backup,
                 ),
-                title: Text(
-                  "Home",
-                ),
+                label: "Conference",
               ),
               BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.person_pin,
+                  Icons.insert_drive_file,
                 ),
-                title: Text(
-                  "Join Conference",
-                ),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.settings,
-                ),
-                title: Text(
-                  "Settings",
-                ),
+                label: "Create-id",
               ),
             ]),
       ),
@@ -96,11 +97,11 @@ class _MainScreenState extends State<MainScreen> {
           title: Text('Are you sure to exit?'),
           content: Text("You wont be connected"),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text('Yes'),
               onPressed: () => exit(0),
             ),
-            FlatButton(
+            TextButton(
               child: Text('No'),
               onPressed: () => Navigator.pop(context),
             ),

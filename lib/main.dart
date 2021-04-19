@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:near/provider_app.dart';
-import 'package:near/provider_meeting.dart';
-import 'package:near/screen_splash.dart';
+import 'package:near/logic/providers/provider_app.dart';
+import 'package:near/logic/providers/provider_meeting.dart';
+import 'package:near/presentations/screen_splash.dart';
 
 import 'package:provider/provider.dart';
 
